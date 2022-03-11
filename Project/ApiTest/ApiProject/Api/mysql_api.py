@@ -23,13 +23,14 @@ def add_mysql(create_user):
     :return:
     """
     data = json.loads(str(request.data, 'utf-8'))
-    config_name = data['projectName']
-    if '/' in config_name:
+    config_name = data['configName']
+    project_data = data['projectName']
+    if '/' in project_data:
         project_data = data['projectName'].split('/')
         project_name = project_data[0]
         project_id = project_data[1]
     else:
-        project_name = config_name
+        project_name = project_data
         project_id = data['projectId']
     environment = data['environment']
     host = data['host']
@@ -74,9 +75,14 @@ def mysql_update(update_user):
     data = json.loads(str(request.data, 'utf-8'))
     config_id = data['id']
     config_name = data['configName']
-    project_data = data['projectName'].split('/')
-    project_name = project_data[0]
-    project_id = project_data[1]
+    project_data = data['projectName']
+    if '/' in project_data:
+        project_data = data['projectName'].split('/')
+        project_name = project_data[0]
+        project_id = project_data[1]
+    else:
+        project_name = project_data
+        project_id = data['projectId']
     environment = data['environment']
     host = data['host']
     port = data['port']
