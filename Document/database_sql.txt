@@ -1,0 +1,194 @@
+-- 创建 user 表
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userName` varchar(64) DEFAULT NULL COMMENT '登录用户名',
+  `password` varchar(64) DEFAULT NULL COMMENT '登录密码',
+  `realName` varchar(64) DEFAULT NULL COMMENT '真实姓名',
+  `phone` varchar(64) DEFAULT NULL COMMENT '手机号码',
+  `roles` varchar(32) DEFAULT NULL COMMENT '用户角色--admin，editor',
+  `status` varchar(32) DEFAULT NULL COMMENT '状态--启用；禁用',
+  `lastLogin_time` datetime DEFAULT NULL COMMENT '最后登录时间',
+  `update_user` varchar(64) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_user_userName` (`userName`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- 创建 project 表
+CREATE TABLE `project` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `projectName` varchar(64) DEFAULT NULL COMMENT '项目名称',
+  `describe` varchar(255) DEFAULT NULL COMMENT '项目描述',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_user` varchar(65) NOT NULL,
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_user` varchar(64) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_project_projectName` (`projectName`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- 创建 mysql_config 表
+CREATE TABLE `mysql_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `configName` varchar(64) DEFAULT NULL COMMENT '配置名称',
+  `projectId` varchar(64) DEFAULT NULL COMMENT '项目id',
+  `projectName` varchar(255) DEFAULT NULL COMMENT '项目名称',
+  `environment` varchar(64) DEFAULT NULL COMMENT '运行环境',
+  `host` varchar(255) DEFAULT NULL COMMENT 'host',
+  `port` varchar(64) DEFAULT NULL COMMENT 'port',
+  `user` varchar(255) DEFAULT NULL COMMENT 'user',
+  `password` varchar(255) DEFAULT NULL COMMENT 'password',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_user` varchar(65) NOT NULL,
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_user` varchar(64) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_mysql_config_configName` (`configName`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- 创建 url_config 表
+CREATE TABLE `url_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `configName` varchar(64) DEFAULT NULL COMMENT '配置名称',
+  `projectId` varchar(64) DEFAULT NULL COMMENT '项目id',
+  `projectName` varchar(255) DEFAULT NULL COMMENT '项目名称',
+  `environment` varchar(64) DEFAULT NULL COMMENT '运行环境',
+  `base_url` varchar(255) DEFAULT NULL COMMENT 'base_url',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_user` varchar(65) NOT NULL,
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_user` varchar(64) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_url_config_configName` (`configName`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- 创建 header_config 表
+CREATE TABLE `header_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `configName` varchar(64) DEFAULT NULL COMMENT '配置名称',
+  `projectId` varchar(64) DEFAULT NULL COMMENT '项目id',
+  `projectName` varchar(255) DEFAULT NULL COMMENT '项目名称',
+  `environment` varchar(64) DEFAULT NULL COMMENT '运行环境',
+  `header` varchar(255) DEFAULT NULL COMMENT 'header',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_user` varchar(65) NOT NULL,
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_user` varchar(64) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_header_config_configName` (`configName`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- 创建 case_name 表
+CREATE TABLE `case_name` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `case_name` varchar(64) NOT NULL COMMENT '用例名称',
+  `parent_id` int(11) DEFAULT NULL COMMENT '父id',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_user` varchar(65) NOT NULL COMMENT '创建人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_user` varchar(64) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- 创建 case_data 表
+CREATE TABLE `case_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `text` longtext NOT NULL COMMENT '测试用例内容',
+  `case_name_id` int(11) NOT NULL COMMENT '测试用例名称id',
+  `case_name` varchar(255) NOT NULL COMMENT '测试用例名称',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_user` varchar(65) NOT NULL COMMENT '创建人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_user` varchar(64) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_case_data_case_name_id` (`case_name_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- 创建 case_data_history 表
+CREATE TABLE `case_data_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `case_id` int(11) NOT NULL,
+  `text` longtext NOT NULL COMMENT '测试用例内容',
+  `case_name_id` int(11) NOT NULL COMMENT '测试用例名称id',
+  `case_name` varchar(255) NOT NULL COMMENT '测试用例名称',
+  `is_delete` varchar(64) DEFAULT NULL COMMENT '是否被删除：1，被删除',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_user` varchar(65) NOT NULL COMMENT '创建人',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- 创建 case_tag 表
+CREATE TABLE `case_tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tag` varchar(255) NOT NULL COMMENT '测试用例标签',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_user` varchar(65) NOT NULL COMMENT '创建人',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_case_tag_tag` (`tag`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- 创建 file_name 表
+CREATE TABLE `file_name` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `file_name` varchar(64) NOT NULL COMMENT '文章名称',
+  `parent_id` int(11) DEFAULT NULL COMMENT '父id',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_user` varchar(65) NOT NULL COMMENT '创建人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_user` varchar(64) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- 创建 file_data 表
+CREATE TABLE `file_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` longtext NOT NULL COMMENT '文章内容',
+  `file_name_id` int(11) NOT NULL COMMENT '文章名称id',
+  `file_name` varchar(255) NOT NULL COMMENT '文章名称',
+  `is_open` varchar(64) NOT NULL COMMENT '是否公开：1--公开；2--私密；',
+  `is_edit` varchar(64) NOT NULL COMMENT '他人是否可编辑：1--可编辑；2--不可编辑；',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_user` varchar(65) NOT NULL COMMENT '创建人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_user` varchar(64) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_file_data_file_name_id` (`file_name_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- 创建 file_data_history 表
+CREATE TABLE `file_data_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `file_id` int(11) NOT NULL COMMENT '文章ID',
+  `content` longtext NOT NULL COMMENT '测试用例内容',
+  `file_name_id` int(11) NOT NULL COMMENT '测试用例名称id',
+  `file_name` varchar(255) NOT NULL COMMENT '测试用例名称',
+  `is_open` varchar(64) NOT NULL COMMENT '是否公开',
+  `is_edit` varchar(64) NOT NULL COMMENT '他人是否可编辑',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_user` varchar(65) NOT NULL COMMENT '创建人',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- 创建 todo_list 表
+CREATE TABLE `todo_list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `contents` longtext NOT NULL COMMENT '待办事项',
+  `todo_date` datetime NOT NULL COMMENT '待办日期',
+  `create_user` varchar(65) NOT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
