@@ -12,5 +12,6 @@ from src.Case.Api.case_data_api import app
 from src.File.Api.file_name_api import app
 from src.File.Api.file_data_api import app
 from src.TodoList.Api.todo_list_api import app
+from src.ApiTest.TestData.Api.data_api import app
 
 app.run(host='192.168.1.102', port=8888, debug=True)
