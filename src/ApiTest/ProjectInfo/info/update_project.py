@@ -4,7 +4,7 @@
 
 import time
 from Common.mysql import db
-from src.ApiTest.ProjectInfo.Database.project_database import Project
+from src.ApiTest.ProjectInfo.Database.project_database import Project, ProjectSchema
 from sqlalchemy.exc import SQLAlchemyError
 from Common.yaml_method import YamlMethod
 
@@ -32,8 +32,13 @@ class UpdateProject:
         project = Project.query.filter_by(id=project_id).first()
 
         if project:
-            project_info = Project.query.filter_by(projectName=project_name).first()
-            if project_info is None:
+            project_info = Project.query.filter_by(projectName=project_name).all()
+            info = []
+            for i in project_info:
+                data_schema = ProjectSchema()
+                name = data_schema.dump(i)
+                info.append(name)
+            if len(info) < 2:
                 project.projectName = project_name
                 project.describe = describe
                 project.update_time = update_time

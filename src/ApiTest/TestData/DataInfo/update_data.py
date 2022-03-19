@@ -4,7 +4,7 @@
 
 import time
 from Common.mysql import db
-from src.ApiTest.TestData.Database.data_database import TestData
+from src.ApiTest.TestData.Database.data_database import TestData, TestDataSchema
 from sqlalchemy.exc import SQLAlchemyError
 from Common.yaml_method import YamlMethod
 
@@ -32,8 +32,13 @@ class UpdateData:
         data = TestData.query.filter_by(id=data_id).first()
 
         if data:
-            data_info = TestData.query.filter_by(data_name=data_name).first()
-            if data_info is None:
+            data_info = TestData.query.filter_by(data_name=data_name).all()
+            info = []
+            for i in data_info:
+                data_schema = TestDataSchema()
+                name = data_schema.dump(i)
+                info.append(name)
+            if len(info) < 2:
                 data.data_name = data_name
                 data.data_value = value
                 data.update_time = update_time

@@ -4,7 +4,7 @@
 
 import time
 from Common.mysql import db
-from src.ApiTest.ProjectConfig.Database.mysqlConfig_database import MysqlConfig
+from src.ApiTest.ProjectConfig.Database.mysqlConfig_database import MysqlConfig, MysqlConfigSchema
 from sqlalchemy.exc import SQLAlchemyError
 from Common.yaml_method import YamlMethod
 
@@ -38,8 +38,13 @@ class UpdateMysqlInfo:
         info = MysqlConfig.query.filter_by(id=config_id).first()
 
         if info:
-            mysql_info = MysqlConfig.query.filter_by(configName=config_name).first()
-            if mysql_info is None:
+            mysql_info = MysqlConfig.query.filter_by(configName=config_name).all()
+            info = []
+            for i in mysql_info:
+                data_schema = MysqlConfigSchema()
+                name = data_schema.dump(i)
+                info.append(name)
+            if len(info) < 2:
                 info.configName = config_name
                 info.projectId = project_id
                 info.projectName = project_name

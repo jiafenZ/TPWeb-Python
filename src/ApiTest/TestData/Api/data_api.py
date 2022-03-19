@@ -9,7 +9,7 @@ from src.User.token import token_verify, before_request
 from Common.yaml_method import YamlMethod
 from src.ApiTest.TestData.DataInfo.add_data import AddData
 from src.ApiTest.TestData.DataInfo.data_list import DataList
-from src.ApiTest.TestData.DataInfo.updata_data import UpdateData
+from src.ApiTest.TestData.DataInfo.update_data import UpdateData
 from src.ApiTest.TestData.DataInfo.delete_data import DeleteData
 
 code = YamlMethod().read_data('code.yaml')['code']
@@ -25,7 +25,7 @@ def add_data(create_user):
     """
     data = json.loads(str(request.data, 'utf-8'))
     data_name = data['data_name']
-    value = data['value']
+    value = data['data_value']
 
     # 校验参数
     if not all([data_name, value, create_user]):
@@ -59,7 +59,7 @@ def update_data(update_user):
     data = json.loads(str(request.data, 'utf-8'))
     data_id = data['id']
     data_name = data['data_name']
-    value = data['value']
+    value = data['data_value']
 
     # 校验参数
     if not all([str(data_id), data_name, value, update_user]):

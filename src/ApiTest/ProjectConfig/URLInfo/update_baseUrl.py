@@ -4,7 +4,7 @@
 
 import time
 from Common.mysql import db
-from src.ApiTest.ProjectConfig.Database.baseUrl_database import UrlConfig
+from src.ApiTest.ProjectConfig.Database.baseUrl_database import UrlConfig, UrlConfigSchema
 from sqlalchemy.exc import SQLAlchemyError
 from Common.yaml_method import YamlMethod
 
@@ -35,8 +35,13 @@ class UpdateUrlInfo:
         info = UrlConfig.query.filter_by(id=config_id).first()
 
         if info:
-            url_info = UrlConfig.query.filter_by(configName=config_name).first()
-            if url_info is None:
+            url_info = UrlConfig.query.filter_by(configName=config_name).all()
+            info = []
+            for i in url_info:
+                data_schema = UrlConfigSchema()
+                name = data_schema.dump(i)
+                info.append(name)
+            if len(info) < 2:
                 info.configName = config_name
                 info.projectId = project_id
                 info.projectName = project_name

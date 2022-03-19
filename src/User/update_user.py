@@ -39,7 +39,6 @@ class UpdateUser:
         if user:
             # 查询是否存在相同登录账号名称
             name_info = User.query.filter_by(userName=username).first()
-
             user_schema = UserSchema()
             user_data = user_schema.dump(name_info)
             if user_data['id'] != user_id:

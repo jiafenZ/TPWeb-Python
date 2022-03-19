@@ -4,7 +4,7 @@
 
 import time
 from Common.mysql import db
-from src.ApiTest.ProjectConfig.Database.header_database import HeaderConfig
+from src.ApiTest.ProjectConfig.Database.header_database import HeaderConfig, HeaderConfigSchema
 from sqlalchemy.exc import SQLAlchemyError
 from Common.yaml_method import YamlMethod
 
@@ -35,8 +35,13 @@ class UpdateHeaderInfo:
         info = HeaderConfig.query.filter_by(id=config_id).first()
 
         if info:
-            header_info = HeaderConfig.query.filter_by(configName=config_name).first()
-            if header_info is None:
+            header_info = HeaderConfig.query.filter_by(configName=config_name).all()
+            info = []
+            for i in header_info:
+                data_schema = HeaderConfigSchema()
+                name = data_schema.dump(i)
+                info.append(name)
+            if len(info) < 2:
                 info.configName = config_name
                 info.projectId = project_id
                 info.projectName = project_name
