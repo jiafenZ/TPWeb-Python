@@ -2,6 +2,7 @@
 # @Author : Kevin
 # @Time : 2021/12/31 16:18
 
+from Common.yaml_method import YamlMethod
 from src.User.Api.user_api import app
 from src.ApiTest.ProjectConfig.Api.header_api import app
 from src.ApiTest.ProjectInfo.Api.project_api import app
@@ -14,4 +15,8 @@ from src.File.Api.file_data_api import app
 from src.TodoList.Api.todo_list_api import app
 from src.ApiTest.TestData.Api.data_api import app
 
-app.run(host='192.168.1.102', port=8888, debug=True)
+server = YamlMethod().read_data('account_info.yaml')['server']
+host = server[0]
+port = server[1]
+
+app.run(host=host, port=port, debug=True)

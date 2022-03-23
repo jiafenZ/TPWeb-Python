@@ -4,21 +4,16 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from Common.yaml_method import YamlMethod
 
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = '123456'  # 密码
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@192.168.25.129:3306/tp_web'
-"""
-    协议：mysql+pymysql
-    用户名：root
-    密码：123456
-    IP地址：192.168.21.139
-    端口：3306
-    数据库名：test #这里的数据库需要提前建好
-"""
+account = YamlMethod().read_data('account_info.yaml')['mysql']
 
+app.config['SECRET_KEY'] = account[3]  # 密码
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://%s:%s@%s:%s/%s' % (account[2], account[3], account[0],
+                                                                            account[1], account[4])
 
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

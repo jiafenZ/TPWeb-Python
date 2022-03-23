@@ -1,0 +1,11 @@
+mysql:
+  - 192.168.21.154  # host
+  - 3306  # port
+  - root  # user
+  - a123456!  # password
+  - test  # database name
+
+server:
+  - 192.168.0.114  # host
+  - 8888  # port
+
