@@ -2,38 +2,47 @@
 # @Author : Kevin
 # @Time : 2022/1/4 15:52
 import functools
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from itsdangerous import BadSignature, SignatureExpired
+import json
+
+from jose import jwt
+from datetime import datetime, timedelta
 from Common.yaml_method import YamlMethod
-from flask_httpauth import HTTPBasicAuth
 from src.User.Database.user_database import User
 from src.User.Database.user_database import UserSchema
 from flask import request, g
 
-auth = HTTPBasicAuth()
-SECRET_KEY = 'testing platform'
-
 evn = YamlMethod().read_data('environment.yaml')['evn']
+SECRET_KEY = 'testing platform' # 加密密钥即自定义随机字符串
+ALGORITHM = "HS256"  # 加密算法HS256
 
 
-# 生成token, 有效时间为一周
-def generate_auth_token(user_name, expiration=604800):
-    s = Serializer(SECRET_KEY, expires_in=expiration)
-    return s.dumps({'user_name': user_name})
+def generate_auth_token(name, expires_delta=None):
+    """
+    # 生成token
+    :param name: 保存到token的值
+    :param expires_delta: 过期时间
+    :return:
+    """
+    if expires_delta:
+        # expire = datetime.utcnow() + expires_delta
+        expire = datetime.now() + expires_delta
+
+    else:
+        # expire = datetime.utcnow() + timedelta(minutes=config.ACCESS_TOKEN_EXPIRE_MINUTES)
+        # 设置过期时间:7天后
+        expire = datetime.now() + timedelta(minutes=10080)
+    to_encode = {"exp": expire, "sub": str(name)}
+
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
 
 
-# 解析token
 def verify_auth_token(token):
-    s = Serializer(SECRET_KEY)
-    # token正确
     try:
-        data = s.loads(token)
-        return data
-    # token过期
-    except SignatureExpired:
-        return None
-    # token错误
-    except BadSignature:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        return payload
+    except (jwt.JWTError, jwt.ExpiredSignatureError, AttributeError):
+        # 抛出自定义异常， 然后捕获统一响应
         return None
 
 
@@ -44,7 +53,8 @@ def verify_token(token):
     # 先验证token
     res = verify_auth_token(token)
     if res is not None:
-        user_name = res['user_name']
+        dic_res = eval(res['sub'])
+        user_name = dic_res['user_name']
     else:
         return False
 

@@ -24,7 +24,9 @@ class Login:
         :param password: 前端传过来的密码
         :return: 登录结果和用户信息
         """
+        # 定义响应体data内容字典格式变量data
         data = {}
+        # 定义响应体字典格式变量dic
         dic = {}
 
         code = YamlMethod().read_data('code.yaml')['code']
@@ -46,8 +48,9 @@ class Login:
                 dic['message'] = '登录成功'
 
                 # 生成token
-                token = generate_auth_token(user_name)
-                data['token'] = token.decode()
+                token_data = {'user_name': user_name, 'password': password}
+                token = generate_auth_token(token_data)
+                data['token'] = token
 
                 # 记录登录时间
                 login_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
