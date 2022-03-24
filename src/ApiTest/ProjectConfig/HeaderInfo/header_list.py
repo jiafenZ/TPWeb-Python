@@ -44,7 +44,7 @@ class HeaderList:
             'code': code[0],
             'message': 'success',
             'data': {
-                'mysqlList': info,
+                'headerList': info,
                 'total': total
             }
         }

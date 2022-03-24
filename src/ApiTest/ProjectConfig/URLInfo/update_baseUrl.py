@@ -36,12 +36,12 @@ class UpdateUrlInfo:
 
         if info:
             url_info = UrlConfig.query.filter_by(configName=config_name).all()
-            info = []
+            res_info = []
             for i in url_info:
                 data_schema = UrlConfigSchema()
                 name = data_schema.dump(i)
-                info.append(name)
-            if len(info) < 2:
+                res_info.append(name)
+            if len(res_info) < 2:
                 info.configName = config_name
                 info.projectId = project_id
                 info.projectName = project_name
