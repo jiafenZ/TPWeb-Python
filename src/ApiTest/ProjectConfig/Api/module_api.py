@@ -40,7 +40,7 @@ def add_module(create_user):
 @before_request
 def module_list():
     """
-    获取项目模块名称列表接口
+    获取项目模块列表接口
     :return:
     """
     data = json.loads(str(request.data, 'utf-8'))
@@ -50,6 +50,20 @@ def module_list():
     project_name = data['projectName']
 
     res = ModuleList().module_list(page, limit, module_name, project_name)
+    return res
+
+
+@app.route('/module/name_list', methods=['POST'])
+@before_request
+def module_name_list():
+    """
+    获取项目模块名称列表接口
+    :return:
+    """
+    data = json.loads(str(request.data, 'utf-8'))
+    project_name = data['projectName']
+
+    res = ModuleList().module_name_list(project_name)
     return res
 
 

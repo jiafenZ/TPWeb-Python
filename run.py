@@ -15,6 +15,7 @@ from src.File.Api.file_data_api import app
 from src.TodoList.Api.todo_list_api import app
 from src.ApiTest.TestData.Api.data_api import app
 from src.ApiTest.ProjectConfig.Api.module_api import app
+from src.ApiTest.ApiInfo.Api.api_info_api import app
 
 server = YamlMethod().read_data('account_info.yaml')['server']
 host = server[0]

@@ -14,7 +14,7 @@ class ModuleList:
     @staticmethod
     def module_list(page, limit, module_name, project_name):
         """
-        获取URL配置列表接口
+        获取模块列表接口
         :param page: 页码
         :param limit: 每页多少条数据
         :param module_name: 模块名称
@@ -46,6 +46,34 @@ class ModuleList:
             'data': {
                 'moduleList': info,
                 'total': total
+            }
+        }
+
+        return res
+
+    @staticmethod
+    def module_name_list(project_name):
+        """
+        获取项目模块名称列表接口
+        :param project_name: 项目名
+        """
+        code = YamlMethod().read_data('code.yaml')['code']
+        data = Module.query.filter_by(projectName=project_name).all()
+        info = []
+        for i in data:
+            mysql_schema = ModuleSchema()
+            mysql_data = mysql_schema.dump(i)
+            data = {
+                'moduleName': mysql_data['moduleName']
+            }
+            # 将单条header信息添加到info中
+            info.append(data)
+
+        res = {
+            'code': code[0],
+            'message': 'success',
+            'data': {
+                'moduleNameList': info,
             }
         }
 

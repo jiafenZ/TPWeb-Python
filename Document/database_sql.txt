@@ -220,3 +220,26 @@ CREATE TABLE `module` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_module_moduleName` (`moduleName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- 创建 api_info 表
+CREATE TABLE `api_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `apiName` varchar(64) DEFAULT NULL COMMENT '接口名称',
+  `projectName` varchar(64) DEFAULT NULL COMMENT '项目名称',
+  `moduleName` varchar(64) DEFAULT NULL COMMENT '模块名称',
+  `path` varchar(255) DEFAULT NULL COMMENT '请求路径',
+  `pre_parameter` varchar(255) DEFAULT NULL COMMENT '前置参数',
+  `headers` varchar(255) DEFAULT NULL COMMENT '请求头',
+  `debug_headers` varchar(255) DEFAULT NULL COMMENT '调试请求头',
+  `body` varchar(255) DEFAULT NULL COMMENT '请求体',
+  `debug_body` varchar(255) DEFAULT NULL COMMENT '调试请求体',
+  `after_parameter` varchar(255) DEFAULT NULL COMMENT '响应参数提取',
+  `assert_sql` varchar(255) DEFAULT NULL COMMENT '数据库断言',
+  `assert_parameter` varchar(255) DEFAULT NULL COMMENT '接口返回参数断言',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_user` varchar(65) NOT NULL,
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_user` varchar(64) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

@@ -34,7 +34,7 @@ def add_project(create_user):
     if not all([project_name, create_user]):
         return jsonify(code=code[7], msg="信息不完整")
 
-    # 提交注册信息
+    # 提交信息
     res = AddProject().add_project(project_name, describe, create_user)
     return jsonify(res)
 

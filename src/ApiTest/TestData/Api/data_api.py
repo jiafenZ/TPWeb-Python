@@ -43,8 +43,12 @@ def data_list():
     获取测试数据列表接口
     :return:
     """
+    data = json.loads(str(request.data, 'utf-8'))
+    page = data['page']
+    limit = data['limit']
+    data_name = data['data_name']
 
-    res = DataList().data_list()
+    res = DataList().data_list(page, limit, data_name)
     return res
 
 
