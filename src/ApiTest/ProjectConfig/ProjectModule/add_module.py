@@ -13,7 +13,7 @@ class AddModule:
     新增项目模块
     """
     @staticmethod
-    def add_module(module_name, project_name, create_user):
+    def add_module(module_name, project_id, project_name, create_user):
         """
         新增项目
         :param module_name: 项目模块名称
@@ -28,7 +28,7 @@ class AddModule:
         if module is None:
             create_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             # 项目信息插入数据库
-            module = Module(moduleName=module_name, projectName=project_name, create_time=create_time, create_user=create_user)
+            module = Module(moduleName=module_name, projectId=project_id, projectName=project_name, create_time=create_time, create_user=create_user)
             db.session.add(module)
             db.session.commit()
 

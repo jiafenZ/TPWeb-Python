@@ -10,6 +10,7 @@ class Module(db.Model):
     __tablename__ = 'module'  # 数据库名称
     id = db.Column(db.Integer, primary_key=True)
     moduleName = db.Column(db.String(64), unique=True, index=True)  # 索引
+    projectId = db.Column(db.String(64))
     projectName = db.Column(db.String(64))
     create_time = db.Column(db.DATETIME)
     create_user = db.Column(db.String(65))

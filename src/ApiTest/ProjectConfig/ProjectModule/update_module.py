@@ -15,11 +15,12 @@ class UpdateModule:
     """
 
     @staticmethod
-    def update_module(module_id, module_name, project_name, update_user):
+    def update_module(module_id, module_name, project_id, project_name, update_user):
         """
         更新项目模块信息接口
         :param module_id: 项目模块ID
         :param module_name: 项目模块名称
+        :param project_id: 项目ID
         :param project_name: 项目名称
         :param update_user: 更新人
         :return:
@@ -41,6 +42,7 @@ class UpdateModule:
             if len(res_info) < 2:
                 module.moduleName = module_name
                 module.projectName = project_name
+                module.projectId = project_id
                 module.update_time = update_time
                 module.update_user = update_user
 

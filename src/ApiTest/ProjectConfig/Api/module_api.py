@@ -25,14 +25,21 @@ def add_module(create_user):
     """
     data = json.loads(str(request.data, 'utf-8'))
     module_name = data['moduleName']
-    project_name = data['projectName']
+    project_data = data['projectName']
+    if '/' in project_data:
+        project_data = data['projectName'].split('/')
+        project_name = project_data[0]
+        project_id = project_data[1]
+    else:
+        project_name = project_data
+        project_id = data['projectId']
 
     # 校验参数
     if not all([module_name, create_user]):
         return jsonify(code=code[7], msg="信息不完整")
 
     # 提交注册信息
-    res = AddModule().add_module(module_name, project_name, create_user)
+    res = AddModule().add_module(module_name, project_id, project_name, create_user)
     return jsonify(res)
 
 
@@ -82,14 +89,16 @@ def module_update(update_user):
     if '/' in project_data:
         project_data = data['projectName'].split('/')
         project_name = project_data[0]
+        project_id = project_data[1]
     else:
         project_name = project_data
+        project_id = data['projectId']
 
     # 校验参数
     if not all([module_name, update_user]):
         return jsonify(code=code[7], msg="信息不完整")
 
-    res = UpdateModule().update_module(module_id, module_name, project_name, update_user)
+    res = UpdateModule().update_module(module_id, module_name, project_id, project_name, update_user)
     return res
 
 
