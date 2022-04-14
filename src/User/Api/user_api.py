@@ -18,6 +18,7 @@ from Common.yaml_method import YamlMethod
 
 code = YamlMethod().read_data('code.yaml')['code']
 evn = YamlMethod().read_data('environment.yaml')['evn']
+debug = YamlMethod().read_data('environment.yaml')['debug']
 
 
 @app.route('/user/register', methods=['POST'])
@@ -47,7 +48,7 @@ def login():
     后台登录接口
     :return:
     """
-    if evn == 'vue':
+    if debug == 'vue':
         data = json.loads(str(request.data, 'utf-8'))
         user_name = data['username']
         password = data['password']

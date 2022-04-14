@@ -12,6 +12,7 @@ from src.File.FileData.get_file_data import GetFileData
 
 code = YamlMethod().read_data('code.yaml')['code']
 evn = YamlMethod().read_data('environment.yaml')['evn']
+debug = YamlMethod().read_data('environment.yaml')['debug']
 
 
 @app.route('/file_data/add', methods=['POST'])
@@ -46,7 +47,7 @@ def get_file_data(request_user):
     :return:
     """
 
-    if evn == 'vue':
+    if debug == 'vue':
         data = json.loads(str(request.data, 'utf-8'))
         file_name_id = data['name_id']
     else:

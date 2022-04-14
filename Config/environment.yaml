@@ -1,1 +1,2 @@
-evn: vue   # 调试环境配置；postman调用--→postman；vue调用--→vue；
+evn: prd   # 调试环境配置；prd--→生产环境；dev--→开发环境；
+debug: vue  # postman--→postman调试接口；vue--→vue调试接口

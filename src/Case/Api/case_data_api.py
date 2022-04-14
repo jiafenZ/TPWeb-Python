@@ -15,6 +15,7 @@ from src.Case.CaseData.sprint_case_count import SprintCaseCount
 
 code = YamlMethod().read_data('code.yaml')['code']
 evn = YamlMethod().read_data('environment.yaml')['evn']
+debug = YamlMethod().read_data('environment.yaml')['debug']
 
 
 @app.route('/case_data/add', methods=['POST'])
@@ -25,7 +26,7 @@ def add_case_data(create_user):
     :param create_user: 创建人
     :return:
     """
-    if evn == 'vue':
+    if debug == 'vue':
         data = json.loads(str(request.data, 'utf-8'))
         text = str(data['text'])
         case_name_id = data['name_id']
@@ -52,7 +53,7 @@ def case_data_list():
     :return:
     """
 
-    if evn == 'vue':
+    if debug == 'vue':
         data = json.loads(str(request.data, 'utf-8'))
         case_name_id = data['case_name_id']
     else:
@@ -105,7 +106,7 @@ def sprint_case_count():
     :return:
     """
 
-    if evn == 'vue':
+    if debug == 'vue':
         data = json.loads(str(request.data, 'utf-8'))
         case_name_id = data['case_name_id']
     else:

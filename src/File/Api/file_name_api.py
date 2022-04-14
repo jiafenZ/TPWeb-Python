@@ -14,6 +14,7 @@ from src.File.FileName.delete_file_name import DeleteFileName
 
 code = YamlMethod().read_data('code.yaml')['code']
 evn = YamlMethod().read_data('environment.yaml')['evn']
+debug = YamlMethod().read_data('environment.yaml')['debug']
 
 
 @app.route('/file_name/add', methods=['POST'])
@@ -24,7 +25,7 @@ def add_file_name(create_user):
     :param create_user: 创建人
     :return:
     """
-    if evn == 'vue':
+    if debug == 'vue':
         data = json.loads(str(request.data, 'utf-8'))
         file_name = data['file_name']
         parent_id = data['parent_id']

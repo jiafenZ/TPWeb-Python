@@ -1,11 +1,23 @@
 mysql:
-  - 212.64.70.113  # host
-  - 3306  # port
-  - root  # user
-  - Aa@12345678  # password
-  - tp_web  # database name
+  dev:
+    - 212.64.70.113  # host
+    - 3306  # port
+    - root  # user
+    - Aa@12345678  # password
+    - tp_web  # database name
+  prd:
+    - 212.64.70.113  # host
+    - 3306  # port
+    - root  # user
+    - Aa@12345678  # password
+    - tp_web  # database name
 
 server:
-  - 0.0.0.0  # host
-  - 8888  # port
+  dev:
+    - 0.0.0.0  # host
+    - 8888  # port
+  prd:
+    - 0.0.0.0  # host
+    - 8888  # port
+
 

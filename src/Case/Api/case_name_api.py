@@ -15,6 +15,7 @@ from src.Case.CaseName.case_name_list import CaseNameList
 
 code = YamlMethod().read_data('code.yaml')['code']
 evn = YamlMethod().read_data('environment.yaml')['evn']
+debug = YamlMethod().read_data('environment.yaml')['debug']
 
 
 @app.route('/case_name/add', methods=['POST'])
@@ -25,7 +26,7 @@ def add_case_name(create_user):
     :param create_user: 创建人
     :return:
     """
-    if evn == 'vue':
+    if debug == 'vue':
         data = json.loads(str(request.data, 'utf-8'))
         case_name = data['case_name']
         parent_id = data['parent_id']

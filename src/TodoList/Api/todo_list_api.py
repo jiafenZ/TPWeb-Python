@@ -14,6 +14,7 @@ from src.TodoList.TodoList.get_todo_tag import GetTodoTag
 
 code = YamlMethod().read_data('code.yaml')['code']
 evn = YamlMethod().read_data('environment.yaml')['evn']
+debug = YamlMethod().read_data('environment.yaml')['debug']
 
 
 @app.route('/todo_list/add', methods=['POST'])
@@ -46,7 +47,7 @@ def get_todo_list(create_user):
     :param create_user: 创建人
     :return:
     """
-    if evn == 'vue':
+    if debug == 'vue':
         data = json.loads(str(request.data, 'utf-8'))
         todo_date = data['todo_date']
     else:

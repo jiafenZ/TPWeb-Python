@@ -27,8 +27,11 @@ class YamlMethod:
                     return os.path.join(root, name)
 
     def get_filepath(self, filename):
-        # path = 'D:\\TPWeb-Python'
-        path = '/var/lib/jenkins/workspace/TPWeb-Python'
+        # 获取项目路径
+        current_path = os.getcwd()
+        path_list = current_path.split('TPWeb-Python')
+        path = path_list[0] + 'TPWeb-Python'
+        # 获取指定文件路径
         file_path = self.search_file(path, filename)
         return file_path
 
@@ -84,4 +87,9 @@ class YamlMethod:
 
 
 if __name__ == '__main__':
-    print(YamlMethod().read_data('code.yaml')['code'][0])
+    # print(YamlMethod().read_data('code.yaml')['code'][0])
+    path = os.getcwd()
+    print(path)
+    path_list = path.split('TPWeb-Python')
+    print(lis)
+    print(lis[0] + 'TPWeb-Python')

@@ -8,8 +8,9 @@ from Common.yaml_method import YamlMethod
 
 
 app = Flask(__name__)
+evn = YamlMethod().read_data('environment.yaml')['evn']
 
-account = YamlMethod().read_data('account_info.yaml')['mysql']
+account = YamlMethod().read_data('account_info.yaml')['mysql'][evn]
 
 app.config['SECRET_KEY'] = account[3]  # 密码
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://%s:%s@%s:%s/%s' % (account[2], account[3], account[0],
