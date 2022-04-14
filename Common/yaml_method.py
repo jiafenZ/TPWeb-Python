@@ -16,23 +16,21 @@ class YamlMethod:
     def __init__(self):
         self.log = MyLog
 
-    def get_filepath(self, filename):
+    def search_file(self, path, file_mame):
         """
-        获取yaml文件路径
-        :param filename: yaml文件名称
-        :return: 返回yaml文件路径
+        查找函数：path-待搜索目录路径 file_mame-待搜索文件名称
         """
-        path = os.path.abspath(filename)
-        path_list = path.split('\\', 2)
-        project_path = path_list[0] + '\\' + path_list[1]
+        # 调用walk方法递归遍历path目录
+        for root, dirs, files in os.walk(path):
+            for name in files:
+                if file_mame == name:
+                    return os.path.join(root, name)
 
-        for root, dirs, files in os.walk(project_path):
-            if 'venv' in dirs:
-                dirs.remove('venv')
-            for file in files:
-                if filename in file:
-                    file_path = root + '\\' + filename
-                    return file_path
+    def get_filepath(self, filename):
+        # path = 'D:\\TPWeb-Python'
+        path = '/var/lib/jenkins/workspace/TPWeb-Python'
+        file_path = self.search_file(path, filename)
+        return file_path
 
     def read_data(self, filename):
         """
