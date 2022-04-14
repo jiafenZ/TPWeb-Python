@@ -6,6 +6,6 @@ mysql:
   - tp_web  # database name
 
 server:
-  - 212.64.70.113  # host
+  - 0.0.0.0  # host
   - 8888  # port
 
