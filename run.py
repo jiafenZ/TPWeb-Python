@@ -22,8 +22,4 @@ server = YamlMethod().read_data('account_info.yaml')['server'][evn]
 host = server[0]
 port = server[1]
 
-if evn == 'dev':
-    app.run(host=host, port=port, debug=True)
-else:
-    server = pywsgi.WSGIServer((host, port), app)
-    server.serve_forever()
+app.run(host=host, port=port, debug=True)
