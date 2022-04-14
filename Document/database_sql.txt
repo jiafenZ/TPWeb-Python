@@ -197,7 +197,7 @@ CREATE TABLE `todo_list` (
 -- 创建 test_data 表
 CREATE TABLE `test_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-	`data_name` varchar(64) DEFAULT NULL COMMENT '参数名称',
+  `data_name` varchar(64) DEFAULT NULL COMMENT '参数名称',
   `data_value` varchar(255) DEFAULT NULL COMMENT '参数值',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_user` varchar(64) NOT NULL,
@@ -211,8 +211,9 @@ CREATE TABLE `test_data` (
 -- 创建 module 表
 CREATE TABLE `module` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-	`moduleName` varchar(64) DEFAULT NULL COMMENT '模块名称',
+  `moduleName` varchar(64) DEFAULT NULL COMMENT '模块名称',
   `projectName` varchar(64) DEFAULT NULL COMMENT '项目名称',
+  `projectId` varchar(64) DEFAULT NULL COMMENT '项目id',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_user` varchar(65) NOT NULL,
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',

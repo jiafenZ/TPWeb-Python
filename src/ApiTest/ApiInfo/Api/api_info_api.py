@@ -57,9 +57,9 @@ def api_list():
     data = json.loads(str(request.data, 'utf-8'))
     page = data['page']
     limit = data['limit']
-    api_name = data['api_name']
-    module_name = data['module_name']
-    project_name = data['project_name']
+    api_name = data['apiName']
+    module_name = data['moduleName']
+    project_name = data['projectName']
 
     res = ApiList().api_list(page, limit, api_name, module_name, project_name)
     return res

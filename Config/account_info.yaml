@@ -3,9 +3,9 @@ mysql:
   - 3306  # port
   - root  # user
   - Aa@12345678  # password
-  - test  # database name
+  - tp_web  # database name
 
 server:
-  - 192.168.31.160  # host
+  - 212.64.70.113  # host
   - 8888  # port
 
