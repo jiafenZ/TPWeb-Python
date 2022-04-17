@@ -18,8 +18,11 @@ from src.ApiTest.ProjectConfig.Api.module_api import app
 from src.ApiTest.ApiInfo.Api.api_info_api import app
 
 evn = YamlMethod().read_data('environment.yaml')['evn']
-server = YamlMethod().read_data('account_info.yaml')['server'][evn]
-host = server[0]
-port = server[1]
+server_info = YamlMethod().read_data('account_info.yaml')['server'][evn]
+host = server_info[0]
+port = server_info[1]
 
-app.run(host=host, port=port, debug=True)
+# app.run(host=host, port=port, debug=True)
+
+server = pywsgi.WSGIServer((host, port), app)
+server.serve_forever()
