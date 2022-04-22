@@ -28,21 +28,22 @@ def add_api(create_user):
     project_name = data['projectName']
     module_name = data['moduleName']
     path = data['path']
+    method = data['method']
     pre_parameter = ['pre_parameter']
     headers = data['headers']
-    debug_headers = data['debug_headers']
+    debug_headers = data['debugHeaders']
     body = data['body']
-    debug_body = data['debug_body']
-    after_parameter = data['after_parameter']
-    assert_sql = data['assert_sql']
-    assert_parameter = data['assert_parameter']
+    debug_body = data['debugBody']
+    after_parameter = str(data['after_parameter'])
+    assert_sql = str(data['assert_sql'])
+    assert_parameter = str(data['assert_parameter'])
 
     # 校验参数
-    if not all([api_name, project_name, module_name, path, body, create_user]):
+    if not all([api_name, project_name, module_name, path, method, create_user]):
         return jsonify(code=code[7], msg="信息不完整")
 
     # 提交信息
-    res = AddApi().add_api(api_name, project_name, module_name, path, pre_parameter, headers, debug_headers, body,
+    res = AddApi().add_api(api_name, project_name, module_name, path, method, pre_parameter, headers, debug_headers, body,
                            debug_body, after_parameter, assert_sql, assert_parameter, create_user)
     return jsonify(res)
 
@@ -79,21 +80,23 @@ def api_update(update_user):
     project_name = data['projectName']
     module_name = data['moduleName']
     path = data['path']
+    method = data['method']
     pre_parameter = ['pre_parameter']
     headers = data['headers']
-    debug_headers = data['debug_headers']
+    debug_headers = data['debugHeaders']
     body = data['body']
-    debug_body = data['debug_body']
+    debug_body = data['debugBody']
     after_parameter = data['after_parameter']
     assert_sql = data['assert_sql']
     assert_parameter = data['assert_parameter']
 
     # 校验参数
-    if not all([api_id, api_name, project_name, module_name, path, body, update_user]):
+    if not all([api_id, api_name, project_name, module_name, path, method, update_user]):
         return jsonify(code=code[7], msg="信息不完整")
 
-    res = UpdateApiInfo().update_api_info(api_id, api_name, project_name, module_name, path, pre_parameter, headers,
-                                          debug_headers, body, debug_body, after_parameter, assert_sql, assert_parameter, update_user)
+    res = UpdateApiInfo().update_api_info(api_id, api_name, project_name, module_name, path, method, pre_parameter,
+                                          headers, debug_headers, body, debug_body, after_parameter, assert_sql,
+                                          assert_parameter, update_user)
     return res
 
 

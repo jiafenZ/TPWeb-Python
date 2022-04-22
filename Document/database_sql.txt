@@ -226,10 +226,11 @@ CREATE TABLE `module` (
 -- 创建 api_info 表
 CREATE TABLE `api_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `apiName` varchar(64) DEFAULT NULL COMMENT '接口名称',
-  `projectName` varchar(64) DEFAULT NULL COMMENT '项目名称',
-  `moduleName` varchar(64) DEFAULT NULL COMMENT '模块名称',
-  `path` varchar(255) DEFAULT NULL COMMENT '请求路径',
+  `apiName` varchar(64) NOT NULL COMMENT '接口名称',
+  `projectName` varchar(64) NOT NULL COMMENT '项目名称',
+  `moduleName` varchar(64) NOT NULL COMMENT '模块名称',
+  `path` varchar(255) NOT NULL COMMENT '请求路径',
+  `method` varchar(64) NOT NULL COMMENT '请求方法',
   `pre_parameter` varchar(255) DEFAULT NULL COMMENT '前置参数',
   `headers` varchar(255) DEFAULT NULL COMMENT '请求头',
   `debug_headers` varchar(255) DEFAULT NULL COMMENT '调试请求头',

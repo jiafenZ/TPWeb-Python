@@ -13,6 +13,7 @@ class ApiInfo(db.Model):
     projectName = db.Column(db.String(64))
     moduleName = db.Column(db.String(64))
     path = db.Column(db.String(255))
+    method = db.Column(db.String(64))
     pre_parameter = db.Column(db.String(255))
     headers = db.Column(db.String(255))
     debug_headers = db.Column(db.String(255))

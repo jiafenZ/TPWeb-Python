@@ -15,7 +15,7 @@ class UpdateApiInfo:
     """
 
     @staticmethod
-    def update_api_info(api_id, api_name, project_name, module_name, path, pre_parameter, headers, debug_headers, body,
+    def update_api_info(api_id, api_name, project_name, module_name, path, method, pre_parameter, headers, debug_headers, body,
                         debug_body, after_parameter, assert_sql, assert_parameter, update_user):
         """
         更新接口信息接口
@@ -24,6 +24,7 @@ class UpdateApiInfo:
         :param project_name: 项目名称
         :param module_name: 模块名称
         :param path: 请求路径
+        :param method: 请求路径
         :param pre_parameter: 前置参数
         :param headers: 请求头
         :param debug_headers: 调试请求头
@@ -46,6 +47,7 @@ class UpdateApiInfo:
             info.projectName = project_name
             info.moduleName = module_name
             info.path = path
+            info.method = method
             info.pre_parameter = pre_parameter
             info.headers = headers
             info.debug_headers = debug_headers

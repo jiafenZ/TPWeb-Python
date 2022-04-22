@@ -87,9 +87,4 @@ class YamlMethod:
 
 
 if __name__ == '__main__':
-    # print(YamlMethod().read_data('code.yaml')['code'][0])
-    path = os.getcwd()
-    print(path)
-    path_list = path.split('TPWeb-Python')
-    print(lis)
-    print(lis[0] + 'TPWeb-Python')
+    print(YamlMethod().read_data('code.yaml')['code'][0])
