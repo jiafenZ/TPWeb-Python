@@ -11,6 +11,7 @@ from src.ApiTest.ApiInfo.info.add_aip import AddApi
 from src.ApiTest.ApiInfo.info.update_api import UpdateApiInfo
 from src.ApiTest.ApiInfo.info.delete_api import DeleteApi
 from src.ApiTest.ApiInfo.info.api_list import ApiList
+from src.ApiTest.ApiInfo.info.get_aip_info import GetApiInfo
 
 code = YamlMethod().read_data('code.yaml')['code']
 
@@ -112,3 +113,20 @@ def api_delete():
 
     res = DeleteApi().delete_api(api_id)
     return res
+
+
+@app.route('/api/info', methods=['POST'])
+@before_request
+def api_info():
+    """
+    获取单个Api信息接口
+    :return:
+    """
+    data = json.loads(str(request.data, 'utf-8'))
+    api_id = data['id']
+    print(data)
+
+    res = GetApiInfo().api_info(api_id)
+    return res
+
+
