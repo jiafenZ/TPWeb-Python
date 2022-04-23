@@ -30,14 +30,14 @@ def add_api(create_user):
     module_name = data['moduleName']
     path = data['path']
     method = data['method']
-    pre_parameter = ['pre_parameter']
+    pre_parameter = data['pre_parameter']
     headers = data['headers']
-    debug_headers = data['debugHeaders']
+    debug_headers = data['debug_headers']
     body = data['body']
-    debug_body = data['debugBody']
-    after_parameter = str(data['after_parameter'])
-    assert_sql = str(data['assert_sql'])
-    assert_parameter = str(data['assert_parameter'])
+    debug_body = data['debug_body']
+    after_parameter = data['after_parameter']
+    assert_sql = data['assert_sql']
+    assert_parameter = data['assert_parameter']
 
     # 校验参数
     if not all([api_name, project_name, module_name, path, method, create_user]):
@@ -76,17 +76,18 @@ def api_update(update_user):
     :return:
     """
     data = json.loads(str(request.data, 'utf-8'))
+
     api_id = data['id']
     api_name = data['apiName']
     project_name = data['projectName']
     module_name = data['moduleName']
     path = data['path']
     method = data['method']
-    pre_parameter = ['pre_parameter']
+    pre_parameter = data['pre_parameter']
     headers = data['headers']
-    debug_headers = data['debugHeaders']
+    debug_headers = data['debug_headers']
     body = data['body']
-    debug_body = data['debugBody']
+    debug_body = data['debug_body']
     after_parameter = data['after_parameter']
     assert_sql = data['assert_sql']
     assert_parameter = data['assert_parameter']

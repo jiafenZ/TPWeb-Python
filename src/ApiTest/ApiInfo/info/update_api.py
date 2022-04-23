@@ -60,11 +60,13 @@ class UpdateApiInfo:
             info.update_time = update_time
             try:
                 db.session.commit()
-            except SQLAlchemyError:
+            except SQLAlchemyError as e:
                 db.session.rollback()
                 res = {
                     'code': code[6],
-                    'data': [],
+                    'data': [{
+                        'error': e
+                    }],
                     'message': '接口信息更新失败'
                 }
                 return res
